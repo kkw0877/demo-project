@@ -51,5 +51,6 @@ coverage/
 .temp/
 *.tmp
 
-# CSV data files
+# CSV data files (실제 데이터는 추적 제외)
 *.csv
+!test-data/sample.kakao.csv

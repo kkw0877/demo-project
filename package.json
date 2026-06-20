@@ -1,0 +1,9 @@
+{
+  "name": "kakao-memo-analyzer",
+  "private": true,
+  "scripts": {
+    "dev": "npx concurrently --names \"BE,FE\" --prefix-colors \"blue,green\" \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "setup": "bash scripts/setup-check.sh",
+    "health": "bash scripts/health-check.sh"
+  }
+}
