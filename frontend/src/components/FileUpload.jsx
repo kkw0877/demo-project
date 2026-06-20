@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import Papa from 'papaparse';
+import { detectColumns } from '../utils/detectColumns';
 
 export default function FileUpload({ onParsed }) {
   const inputRef = useRef(null);
@@ -22,11 +23,7 @@ export default function FileUpload({ onParsed }) {
         }
 
         const fields = results.meta.fields || [];
-        const lower = fields.map((f) => f.toLowerCase().trim());
-
-        const senderKey = fields[lower.findIndex((f) => ['sender', 'name', '이름', '작성자', 'user', '발신자'].includes(f))] || fields[1];
-        const messageKey = fields[lower.findIndex((f) => ['message', 'content', '내용', '메시지', 'text', '텍스트'].includes(f))] || fields[2];
-        const timestampKey = fields[lower.findIndex((f) => ['timestamp', 'time', 'date', '시간', '날짜'].includes(f))] || fields[0];
+        const { timestampKey, senderKey, messageKey } = detectColumns(fields);
 
         const messages = rows.map((r) => ({
           timestamp: r[timestampKey] || '',
